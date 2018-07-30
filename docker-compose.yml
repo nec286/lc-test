@@ -1,0 +1,16 @@
+version: '3.1'
+services:
+  api:
+    build: api
+    volumes:
+      - ./api/app/:/app
+    working_dir: /app
+    command: php -S 0.0.0.0:3000 -t public
+    ports:
+      - 3000:3000
+    container_name: api
+    links:
+        - cache
+  cache:
+    image: redis
+    container_name: cache
